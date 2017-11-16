@@ -48,17 +48,21 @@ const int N = 1e3+5;
 
 
 
-int n;
+
 int main()
 {
-    cout <<1<<endl;
-    for(int cas =0 ;cas<2;cas++)
+     srand( (unsigned)time( NULL ) );
+    int n  = rand()%50;
+    int m  = rand()%50;
+    // int p  =rand()%1000;
+    // if(rand()%2)
+    //     p*=-1;
+    cout << n <<" "<< m<<endl;
+    for(int i=0;i<n;i++)
     {
-        n = rand()%20;
-        cout <<n<<endl;
-        for(int i=0;i<n;i++)
+        for(int i=0;i<m;i++)
         {
-            cout << rand()%70<<" ";
+            cout << rand()%100<<" ";
         }
         cout <<endl;
     }

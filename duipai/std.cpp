@@ -1,55 +1,91 @@
-#include <bits/stdc++.h>
+/**************************************************************
+    Problem: 1619
+    User: RoyYuan
+    Language: C++
+    Result: Wrong_Answer
+****************************************************************/
 
+
+#include<bits/stdc++.h>
+typedef long long ll;
 using namespace std;
 
-#define MP make_pair
-#define PB push_back
-typedef long long LL;
-typedef pair<int,int> PII;
-const double eps=1e-8;
-const double pi=acos(-1.0);
-const int K=1e6+7;
-const int mod=1e9+7;
+inline int read(){int ra,fh;char rx;rx=getchar(),ra=0,fh=1;
+while((rx<'0'||rx>'9')&&rx!='-')rx=getchar();if(rx=='-')
+fh=-1,rx=getchar();while(rx>='0'&&rx<='9')ra*=10,ra+=rx-48,
+rx=getchar();return ra*fh;}
 
-int now,pre,v[K],pe[K],nt[K],dl[K];
-set<int>st;
-vector<int>tmp;
+//const int MAXN=1100;//最大点数
+//const int MAXM=100100;//最大边数
 
-int main(void)
-{
-    //freopen("in.acm","r",stdin);
-    int t,n;cin>>t;
-    while(t--)
+const int INF = 1e9;
+int dir[8][2] = { {1,0},{-1,0},{0,1},{0,-1},{1,1},{-1,1},{1,-1},{-1,-1}};
+int n,m;
+int mm[1000][1000];
+
+struct node{
+    int x;
+    int y;
+    int w;
+    bool operator<(const node x)const
     {
-        memset(dl,0,sizeof dl);
-        scanf("%d",&n);
-        for(int i=1;i<=n;i++)   dl[i]=0,scanf("%d",v+i),pe[i]=i-1,nt[i]=i+1,st.insert(i);
-        nt[0]=1,pe[n+1]=n,pe[1]=0,nt[n]=n+1;
-        v[0]=0,v[n+1]=K;
-        while(st.size())
-        {
-            tmp.clear();
-            for(auto &x:st)
-            {
-                int ntx=nt[x],px=pe[x];
-                if(v[px]>v[x])  tmp.PB(px),tmp.PB(x);
-                if(v[x]>v[ntx]) tmp.PB(x),tmp.PB(ntx);
-            }
-            st.clear();
-            for(auto &x:tmp)
-            if(!dl[x])
-            {
-                int ntx=nt[x],px=pe[x];
-                nt[px]=ntx,pe[ntx]=px;
-                st.insert(px);
-                dl[x]=1;
-            }
-        }
-        int cnt=0;
-        for(int i=nt[0];i!=n+1;i=nt[i])   cnt++;
-        printf("%d\n",cnt);
-        for(int i=nt[0];i!=n+1;i=nt[i])   printf("%d ",v[i]);
-        printf("\n");
+        return w>x.w;
     }
+};
+
+vector<node> a;
+
+
+
+int vis[1000][1000];
+
+void dfs(int x,int y)
+{
+    vis[x][y]=1;
+    for(int i=0;i<8;i++)
+    {
+        int xx = x + dir[i][0];
+        int yy = y + dir[i][1];
+        if(xx<=0||xx>n||yy<=0||yy>m||vis[xx][yy])
+        {
+            continue;
+        }
+        if(mm[xx][yy]<=mm[x][y])
+        {
+            dfs(xx,yy);
+        }
+    }
+}
+
+
+node nt;
+
+
+int main()
+{
+//    freopen("data.txt","r",stdin);
+    ios_base::sync_with_stdio(false);
+    cin >>n>>m;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
+        {
+            cin >> mm[i][j];
+            nt.x = i;
+            nt.y = j;
+            nt.w = mm[i][j];
+            a.push_back(nt);
+        }
+    }
+    sort(a.begin(),a.end());
+
+    int ans = 0;
+    for(int i=0;i<a.size();i++)
+    {
+        if(vis[a[i].x][a[i].y] ) continue;
+        ans++;
+        dfs(a[i].x,a[i].y);
+    }
+    cout << ans<<endl;
     return 0;
 }

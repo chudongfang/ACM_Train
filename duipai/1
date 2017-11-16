@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+stringstream sm;
+string s;
+
+double a[5][5];
+int main()
+{
+
+    freopen("data.txt","r",stdin);
+    ios_base::sync_with_stdio(false);
+
+    while(getline(cin,s))
+    {
+        sm<<s;
+        for(int i=0;i<4;i++)
+        {
+            sm>>a[0][i];
+        }
+        for(int j=1;j<=3;j++)
+        {
+            getline(cin,s)
+            sm.clear();
+            sm<<s;
+            for(int i=0;i<4;i++)
+            {
+                sm>>a[j][i];
+            }
+        }
+
+        getline(cin,s)
+
+    }
+    return 0;
+}
+
+
+
+
+
+
