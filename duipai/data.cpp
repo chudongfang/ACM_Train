@@ -51,8 +51,9 @@ const int N = 1e3+5;
 
 int main()
 {
-     srand( (unsigned)time( NULL ) );
-    int n  = rand()%50;
+    /* srand( (unsigned)time( NULL ) );
+    cout << 10<<endl;
+    int n  = rand()%;
     int m  = rand()%50;
     // int p  =rand()%1000;
     // if(rand()%2)
@@ -65,7 +66,9 @@ int main()
             cout << rand()%100<<" ";
         }
         cout <<endl;
-    }
+    }*/
+    cout <<1<<endl;
+    cout <<"1000000000000 2"<<endl;
 
     return 0;
 }
